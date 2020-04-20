@@ -16,12 +16,17 @@
 package io.helidon.build.cli.impl;
 
 import java.io.File;
+import java.io.PrintWriter;
 import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Properties;
 
+import com.github.mustachejava.DefaultMustacheFactory;
+import com.github.mustachejava.Mustache;
+import com.github.mustachejava.MustacheFactory;
 import io.helidon.build.cli.harness.Command;
 import io.helidon.build.cli.harness.CommandContext;
 import io.helidon.build.cli.harness.CommandExecution;
@@ -100,6 +105,8 @@ public final class InitCommand extends BaseCommand implements CommandExecution {
         this.groupId = groupId;
         this.artifactId = artifactId;
         this.packageName = packageName;
+
+        Example.test();
     }
 
     @Override
@@ -181,5 +188,46 @@ public final class InitCommand extends BaseCommand implements CommandExecution {
         newExt.setVersion(ext.version());
         extensions.add(newExt);
         writePomModel(pomFile, model);
+    }
+
+    static class Example {
+
+        List<Item> items() {
+            return Arrays.asList(
+                    new Item("Item 1", "$19.99", Arrays.asList(new Feature("New!"), new Feature("Awesome!"))),
+                    new Item("Item 2", "$29.99", Arrays.asList(new Feature("Old."), new Feature("Ugly.")))
+            );
+        }
+
+        static class Item {
+            Item(String name, String price, List<Feature> features) {
+                this.name = name;
+                this.price = price;
+                this.features = features;
+            }
+
+            String name, price;
+            List<Feature> features;
+        }
+
+        static class Feature {
+            Feature(String description) {
+                this.description = description;
+            }
+
+            String description;
+        }
+
+        public static void test() {
+            try {
+                MustacheFactory mf = new DefaultMustacheFactory();
+                Mustache mustache = mf.compile("templates/template.mustache");
+                System.out.print("Generating page using template ... ");
+                mustache.execute(new PrintWriter(System.out), new Example()).flush();
+                System.out.println("DONE");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

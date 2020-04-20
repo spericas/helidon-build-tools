@@ -7,5 +7,32 @@
     "allPublicMethods": true,
     "allPublicFields": true,
     "allDeclaredFields": true
+  },
+  {
+    "name": "io.helidon.build.cli.impl.InitCommand$Example",
+    "allPublicConstructors": true,
+    "allDeclaredConstructors": true,
+    "allDeclaredMethods": true,
+    "allPublicMethods": true,
+    "allPublicFields": true,
+    "allDeclaredFields": true
+  },
+  {
+    "name": "io.helidon.build.cli.impl.InitCommand$Example$Item",
+    "allPublicConstructors": true,
+    "allDeclaredConstructors": true,
+    "allDeclaredMethods": true,
+    "allPublicMethods": true,
+    "allPublicFields": true,
+    "allDeclaredFields": true
+  },
+  {
+    "name": "io.helidon.build.cli.impl.InitCommand$Example$Feature",
+    "allPublicConstructors": true,
+    "allDeclaredConstructors": true,
+    "allDeclaredMethods": true,
+    "allPublicMethods": true,
+    "allPublicFields": true,
+    "allDeclaredFields": true
   }
 ]
